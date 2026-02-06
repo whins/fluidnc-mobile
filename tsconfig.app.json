@@ -9,6 +9,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "#build/ui/*": [
+        "./node_modules/.nuxt-ui/ui/*"
       ]
     },
     /* Linting */
@@ -22,6 +25,8 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "auto-imports.d.ts",
+    "components.d.ts"
   ]
 }

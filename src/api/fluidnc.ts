@@ -101,7 +101,11 @@ class FluidNCClient {
     return data.files ?? [];
   }
 
-  async uploadFile(file: File) {
+  async uploadFile(file?: File) {
+    if (!file) {
+      return
+    }
+
     const form = new FormData();
     form.append("file", file);
 

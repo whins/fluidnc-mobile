@@ -29,56 +29,50 @@
 
     <!-- Controls -->
     <div class="flex gap-2">
-      <button class="btn bg-yellow-600" @click="pause">
-        ⏸ Pause
-      </button>
-      <button class="btn bg-blue-600" @click="resume">
-        ▶ Resume
-      </button>
-      <button class="btn bg-red-600" @click="stop">
-        ⏹ Stop
-      </button>
+      <button class="btn bg-yellow-600" @click="pause">⏸ Pause</button>
+      <button class="btn bg-blue-600" @click="resume">▶ Resume</button>
+      <button class="btn bg-red-600" @click="stop">⏹ Stop</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { fluidnc } from '@/api/fluidnc'
-import { useMachineStore } from '@/stores/machine'
+import { ref, onMounted } from "vue";
+import { fluidnc } from "@/api/fluidnc";
+import { useMachineStore } from "@/stores/machine";
 
-const files = ref<string[]>([])
-const machine = useMachineStore()
+const files = ref<string[]>([]);
+const machine = useMachineStore();
 
 async function loadFiles() {
-  files.value = await fluidnc.listFiles()
+  files.value = await fluidnc.listFiles();
 }
 
 async function onUpload(e: Event) {
-  const input = e.target as HTMLInputElement
-  if (!input.files?.length) return
+  const input = e.target as HTMLInputElement;
+  if (!input.files?.length) return;
 
-  await fluidnc.uploadFile(input.files[0])
-  await loadFiles()
+  await fluidnc.uploadFile(input.files[0]);
+  await loadFiles();
 }
 
 function run(name: string) {
-  fluidnc.runFile(name)
+  fluidnc.runFile(name);
 }
 
 function pause() {
-  fluidnc.pause()
+  fluidnc.pause();
 }
 
 function resume() {
-  fluidnc.resume()
+  fluidnc.resume();
 }
 
 function stop() {
-  fluidnc.stop()
+  fluidnc.stop();
 }
 
-onMounted(loadFiles)
+onMounted(loadFiles);
 </script>
 
 <style scoped>

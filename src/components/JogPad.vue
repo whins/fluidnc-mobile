@@ -134,8 +134,9 @@ function stopJog() {
 </script>
 
 <style scoped>
+@reference "tailwindcss";
 .btn {
-  /* @apply bg-gray-700 active:bg-gray-600 text-white text-2xl
-         rounded-lg h-16 flex items-center justify-center; */
+  @apply bg-gray-700 active:bg-gray-600 text-white text-2xl
+         rounded-lg h-16 flex items-center justify-center;
 }
 </style>

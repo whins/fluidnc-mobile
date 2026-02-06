@@ -3,11 +3,20 @@ import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 import { fileURLToPath } from 'url'
 import tailwindcss from '@tailwindcss/vite'
+import ui from '@nuxt/ui/vite'
 
 export default defineConfig({
+  // server: {
+  //   hmr: {
+  //     host: 'localhost', // Or your specific host/IP
+  //   },
+  //   // Consider setting the main host to 0.0.0.0 if in a container
+  //   host: '0.0.0.0'
+  // },
   plugins: [
     tailwindcss(),
     vue(),
+    ui(),
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
