@@ -14,8 +14,8 @@ export const useSettingsStore = defineStore('settings', {
 
     wsUrl: (s) =>
       s.port && s.port !== '80'
-        ? `ws://${s.host}:${s.port}`
-        : `ws://${s.host}`,
+        ? `wss://${s.host}:${s.port}`
+        : `wss://${s.host}`,
   },
 
   actions: {
