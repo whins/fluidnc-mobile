@@ -5,6 +5,7 @@ import { useMachineStore } from '@/stores/machine'
 import { router } from './router'
 import ui from '@nuxt/ui/vue-plugin'
 import App from './App.vue'
+
 import { useTerminalStore } from '@/stores/terminal'
 import { useSettingsStore } from '@/stores/settings'
 

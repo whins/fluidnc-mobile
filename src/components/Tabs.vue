@@ -31,7 +31,7 @@ const active = computed({
   },
   set(tab) {
     router.push({
-      path: tab,
+      path: `${tab}`,
     });
   },
 });

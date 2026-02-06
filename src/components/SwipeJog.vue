@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="zone"
     class="h-40 bg-gray-800 rounded-xl flex items-center justify-center text-gray-400 select-none"
     @pointerdown="start"
     @pointermove="move"
@@ -19,7 +18,6 @@ import { fluidnc } from "@/api/fluidnc";
 import { useMachineStore } from "@/stores/machine";
 
 const machine = useMachineStore();
-const zone = ref<HTMLElement | null>(null);
 
 const active = ref(false);
 const startX = ref(0);

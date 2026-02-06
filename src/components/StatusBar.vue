@@ -26,5 +26,8 @@ const color = computed(() => ({
   Run: 'text-blue-400',
   Hold: 'text-yellow-400',
   Alarm: 'text-red-500',
+  Door: 'text-red-500',
+  Home: 'text-red-500',
+  Jog: 'text-red-500',
 }[machine.state] ?? 'text-gray-300'))
 </script>
