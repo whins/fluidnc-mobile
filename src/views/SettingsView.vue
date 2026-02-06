@@ -6,7 +6,7 @@
       <label class="block text-sm mb-1">Host (IP or mDNS)</label>
       <input
         v-model="settings.host"
-        placeholder="fluidnc.local"
+        placeholder="'192.168.1.91'"
         class="input"
       />
     </div>
@@ -26,7 +26,7 @@
 
     <p class="text-sm text-gray-400">
       Examples: <br />
-      • fluidnc.local<br />
+      • '192.168.1.91'<br />
       • 192.168.1.50
     </p>
   </div>
