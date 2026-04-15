@@ -14,7 +14,13 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
 
-  components: true,
+  // components: true,
+  components: [
+    {
+      path: "~/components",
+      // pathPrefix: false, // Це дозволить використовувати <AppTabs /> замість <LayoutAppTabs />
+    },
+  ],
 
   i18n: {
     locales: [
@@ -22,7 +28,7 @@ export default defineNuxtConfig({
       { code: "uk", name: "Українська", file: "uk.json" },
     ],
     defaultLocale: "en",
-    langDir: "",
+    langDir: "./",
     strategy: "no_prefix",
   },
 
