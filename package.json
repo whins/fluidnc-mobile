@@ -1,0 +1,21 @@
+{
+    "name": "fluidnc-mobile",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt dev",
+        "build": "nuxt build",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview"
+    },
+    "dependencies": {
+        "@nuxtjs/color-mode": "^3.5.2",
+        "@nuxtjs/i18n": "^9.5.3",
+        "@vite-pwa/nuxt": "^0.10.6",
+        "@vueuse/core": "^13.1.0",
+        "@vueuse/nuxt": "^13.1.0",
+        "nuxt": "^3.17.1",
+        "@nuxt/ui": "^3.1.2",
+        "vue": "^3.5.13"
+    }
+}
