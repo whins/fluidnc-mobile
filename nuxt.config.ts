@@ -14,13 +14,15 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
 
+  components: true,
+
   i18n: {
     locales: [
       { code: "en", name: "English", file: "en.json" },
       { code: "uk", name: "Українська", file: "uk.json" },
     ],
     defaultLocale: "en",
-    langDir: "i18n/",
+    langDir: "",
     strategy: "no_prefix",
   },
 
@@ -54,6 +56,9 @@ export default defineNuxtConfig({
     devOptions: {
       enabled: false,
     },
+  },
+  experimental: {
+    appManifest: false,
   },
 
   ssr: false, // SPA mode for Vercel static deploy

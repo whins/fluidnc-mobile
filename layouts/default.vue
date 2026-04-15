@@ -10,6 +10,7 @@
 
     <!-- Bottom navigation -->
     <AppTabs />
+    <app-tabs />
   </div>
 </template>
 

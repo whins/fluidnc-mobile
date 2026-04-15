@@ -9,13 +9,16 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
+    "@nuxt/ui": "^3.3.7",
     "@nuxtjs/color-mode": "^3.5.2",
-    "@nuxtjs/i18n": "^9.5.3",
-    "@vite-pwa/nuxt": "^0.10.6",
-    "@vueuse/core": "^13.1.0",
-    "@vueuse/nuxt": "^13.1.0",
-    "nuxt": "^3.17.1",
-    "@nuxt/ui": "^3.1.2",
-    "vue": "^3.5.13"
+    "@nuxtjs/i18n": "^9.5.6",
+    "@vite-pwa/nuxt": "^0.10.8",
+    "@vueuse/core": "^13.9.0",
+    "@vueuse/nuxt": "^13.9.0",
+    "tailwindcss": "^4.2.2",
+    "vue": "^3.5.32"
+  },
+  "devDependencies": {
+    "nuxt": "^4.4.2"
   }
 }
