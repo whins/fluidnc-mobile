@@ -23,3 +23,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.nuxt
+.output
+.env
+.DS_Store

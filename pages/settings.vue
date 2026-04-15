@@ -1,13 +1,13 @@
 <template>
   <div class="settings-page">
-    <h1 class="page-title">{{ t("settings.title") }}</h1>
+    <h1 class="page-title">{{ t('settings.title') }}</h1>
 
     <!-- Connection -->
     <UCard>
       <template #header>
         <div class="card-header">
           <UIcon name="i-heroicons-wifi" />
-          {{ t("settings.connection") }}
+          {{ t('settings.connection') }}
         </div>
       </template>
 
@@ -33,7 +33,7 @@
             icon="i-heroicons-signal"
             @click="testConnection"
           >
-            {{ t("settings.testConnection") }}
+            {{ t('settings.testConnection') }}
           </UButton>
 
           <UBadge
@@ -41,21 +41,16 @@
             :color="testResult ? 'success' : 'error'"
             variant="subtle"
           >
-            <UIcon
-              :name="testResult ? 'i-heroicons-check' : 'i-heroicons-x-mark'"
-            />
-            {{ testResult ? t("settings.connected") : t("settings.failed") }}
+            <UIcon :name="testResult ? 'i-heroicons-check' : 'i-heroicons-x-mark'" />
+            {{ testResult ? t('settings.connected') : t('settings.failed') }}
           </UBadge>
         </div>
 
         <!-- Live connection status -->
         <div class="live-status">
-          <span
-            class="dot"
-            :class="connected ? 'dot--online' : 'dot--offline'"
-          />
+          <span class="dot" :class="connected ? 'dot--online' : 'dot--offline'" />
           <span class="live-label">
-            {{ connected ? t("status.connected") : t("status.disconnected") }}
+            {{ connected ? t('status.connected') : t('status.disconnected') }}
           </span>
           <span v-if="wsError" class="ws-error">{{ wsError }}</span>
         </div>
@@ -67,7 +62,7 @@
       <template #header>
         <div class="card-header">
           <UIcon name="i-heroicons-swatch" />
-          {{ t("settings.appearance") }}
+          {{ t('settings.appearance') }}
         </div>
       </template>
 
@@ -97,7 +92,7 @@
       <template #header>
         <div class="card-header">
           <UIcon name="i-heroicons-arrows-pointing-out" />
-          {{ t("settings.jog") }}
+          {{ t('settings.jog') }}
         </div>
       </template>
 
@@ -120,17 +115,17 @@
       <template #header>
         <div class="card-header">
           <UIcon name="i-heroicons-information-circle" />
-          {{ t("settings.about") }}
+          {{ t('settings.about') }}
         </div>
       </template>
 
       <div class="setting-group">
         <div class="about-row">
-          <span class="about-label">{{ t("settings.version") }}</span>
+          <span class="about-label">{{ t('settings.version') }}</span>
           <span class="about-value">0.1.0</span>
         </div>
         <div class="about-row">
-          <span class="about-label">{{ t("settings.source") }}</span>
+          <span class="about-label">{{ t('settings.source') }}</span>
           <a
             href="https://github.com/whins/fluidnc-mobile"
             target="_blank"
@@ -145,41 +140,40 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "default" });
+definePageMeta({ layout: 'default' })
 
-const { t } = useI18n();
-const { $fluidnc } = useNuxtApp();
-const { connected, wsError, ping } = $fluidnc;
-const settings = useSettings();
+const { t } = useI18n()
+const { $fluidnc } = useNuxtApp()
+const { connected, wsError, ping } = $fluidnc
+const settings = useSettings()
 
 // ── Theme & locale options ────────────────────────────────────────────────────
 const themeOptions = computed(() => [
-  { value: "system", label: t("settings.themeSystem") },
-  { value: "light", label: t("settings.themeLight") },
-  { value: "dark", label: t("settings.themeDark") },
-]);
+  { value: 'system', label: t('settings.themeSystem') },
+  { value: 'light', label: t('settings.themeLight') },
+  { value: 'dark', label: t('settings.themeDark') },
+])
 
 const localeOptions = [
-  { value: "en", label: "English" },
-  { value: "uk", label: "Українська" },
-];
+  { value: 'en', label: 'English' },
+  { value: 'uk', label: 'Українська' },
+]
 
 // ── Connection test ───────────────────────────────────────────────────────────
-const testing = ref(false);
-const testResult = ref<boolean | null>(null);
+const testing = ref(false)
+const testResult = ref<boolean | null>(null)
 
 async function testConnection() {
-  testing.value = true;
-  testResult.value = null;
+  testing.value = true
+  testResult.value = null
   try {
-    testResult.value = await ping();
-  } finally {
-    testing.value = false;
+    testResult.value = await ping()
+  }
+  finally {
+    testing.value = false
   }
   // Auto-clear after 3s
-  setTimeout(() => {
-    testResult.value = null;
-  }, 3000);
+  setTimeout(() => { testResult.value = null }, 3000)
 }
 </script>
 
