@@ -1,0 +1,74 @@
+{
+    "nav": {
+        "control": "Керування",
+        "files": "Файли",
+        "settings": "Налаштування"
+    },
+    "status": {
+        "connected": "Підключено",
+        "disconnected": "Відключено",
+        "state": {
+            "Idle": "Готовий",
+            "Run": "Виконання",
+            "Hold": "Пауза",
+            "Jog": "Переміщення",
+            "Alarm": "АВАРІЯ",
+            "Door": "Двері",
+            "Home": "Пошук нуля",
+            "Sleep": "Сон",
+            "Unknown": "—"
+        }
+    },
+    "control": {
+        "title": "Керування",
+        "jog": "Переміщення",
+        "step": "Крок",
+        "home": "Нуль",
+        "homeAll": "Всі осі в нуль",
+        "homeX": "Нуль X",
+        "homeY": "Нуль Y",
+        "feedrate": "Подача",
+        "laserPower": "Потужність лазера",
+        "feedHold": "Пауза",
+        "resume": "Продовжити",
+        "reset": "Скинути",
+        "position": "Позиція"
+    },
+    "files": {
+        "title": "Файли",
+        "sdCard": "SD-карта",
+        "upload": "Завантажити",
+        "refresh": "Оновити",
+        "noFiles": "Немає файлів на SD-карті",
+        "run": "Запустити",
+        "delete": "Видалити",
+        "confirmDelete": "Видалити {name}?",
+        "cancel": "Скасувати",
+        "confirm": "Підтвердити",
+        "uploading": "Завантаження…",
+        "running": "Виконується",
+        "progress": "Прогрес",
+        "lines": "Рядки",
+        "bytes": "байт"
+    },
+    "settings": {
+        "title": "Налаштування",
+        "connection": "Підключення",
+        "controllerIp": "IP контролера",
+        "controllerIpPlaceholder": "192.168.1.100",
+        "testConnection": "Перевірити з'єднання",
+        "connected": "Підключено",
+        "failed": "Помилка з'єднання",
+        "appearance": "Вигляд",
+        "theme": "Тема",
+        "themeSystem": "Системна",
+        "themeLight": "Світла",
+        "themeDark": "Темна",
+        "language": "Мова",
+        "jog": "Переміщення",
+        "jogFeedrate": "Швидкість за замовчуванням (мм/хв)",
+        "about": "Про додаток",
+        "version": "Версія",
+        "source": "Вихідний код"
+    }
+}

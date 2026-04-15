@@ -1,9 +1,0 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
-
-html,
-body {
-  background-color: #111827;
-  color: #f9fafb;
-  touch-action: manipulation;
-}
