@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <UFieldGroup orientation="vertical">
+    <!-- <UFieldGroup orientation="vertical">
       <span class="section-label">{{ t("control.step") }}</span>
       <UButton
         v-for="s in steps"
@@ -25,8 +25,10 @@
         :color="selectedStep === s ? 'primary' : 'neutral'"
         size="xl"
         @click="selectedStep = s"
-      />
-    </UFieldGroup>
+      >
+        {{ s }}
+      </UButton>
+    </UFieldGroup> -->
 
     <div class="round-pad">
       <div class="sector-btn-wrapper-up">
