@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   components: [
     {
       path: "~/components",
-      // pathPrefix: false, // Це дозволить використовувати <AppTabs /> замість <LayoutAppTabs />
+      pathPrefix: false, // Це дозволить використовувати <AppTabs /> замість <LayoutAppTabs />
     },
   ],
 
