@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <UDivider />
+    <USeparator />
 
     <!-- Laser power override -->
     <div class="override-row">

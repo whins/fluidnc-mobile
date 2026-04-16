@@ -34,15 +34,14 @@
       </UButton>
     </div>
 
-    <UDivider />
+    <USeparator :label="t('control.jog')" />
 
     <!-- Jog section -->
     <section class="section">
-      <h2 class="section-title">{{ t("control.jog") }}</h2>
       <JogPad />
     </section>
 
-    <UDivider />
+    <USeparator :label="t('control.home')" />
 
     <!-- Home buttons -->
     <section class="section">
@@ -79,7 +78,7 @@
       </div>
     </section>
 
-    <UDivider />
+    <USeparator label="OR" />
 
     <!-- Overrides -->
     <section class="section">
@@ -111,6 +110,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
 definePageMeta({ layout: "default" });
 
 const { t } = useI18n();

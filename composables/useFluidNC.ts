@@ -10,6 +10,7 @@
  */
 
 import { useWebSocket } from "@vueuse/core";
+import { ref } from "vue";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -141,14 +142,18 @@ export function useFluidNC() {
     const ip = settings.controllerIp.value;
     if (!ip) return null;
     // FluidNC WS port = HTTP port + 1 (default 81)
-    return `ws://${ip}:81`;
+    return `ws://${ip}:82`;
   });
 
   let ws: ReturnType<typeof useWebSocket> | null = null;
 
   function connectWS() {
     const url = wsUrl.value;
-    if (!url) return;
+    if (!url) {
+      return;
+    }
+
+    debugger
 
     ws = useWebSocket(url, {
       autoReconnect: {
@@ -415,6 +420,7 @@ export function useFluidNC() {
   // ── Lifecycle ────────────────────────────────────────────────────────────────
 
   onMounted(() => {
+    debugger
     if (settings.controllerIp.value) {
       connectWS();
     }

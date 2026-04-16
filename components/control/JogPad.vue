@@ -1,8 +1,14 @@
 <template>
   <div class="jog-pad">
     <div class="step-selector">
-      <span class="section-label">{{ t("control.step") }}</span>
-      <div class="step-buttons">
+      <UFieldGroup orientation="vertical">
+        <!-- <span class="section-label">{{ t("control.step") }}</span> -->
+        <UBadge
+          color="neutral"
+          variant="outline"
+          size="lg"
+          :label="t(`control.step`)"
+        />
         <UButton
           v-for="s in steps"
           :key="s"
@@ -13,70 +19,73 @@
         >
           {{ s }}
         </UButton>
+      </UFieldGroup>
+    </div>
+
+    <div class="round-pad-wrapper">
+      <div class="round-pad">
+        <div class="sector-btn-wrapper-up">
+          <button
+            class="sector-btn"
+            @click="jog('Y', selectedStep)"
+            :disabled="!connected"
+          >
+            <UIcon name="i-heroicons-chevron-right" />
+          </button>
+        </div>
+        <div class="sector-btn-wrapper-right">
+          <button
+            class="sector-btn"
+            @click="jog('X', selectedStep)"
+            :disabled="!connected"
+          >
+            <UIcon name="i-heroicons-chevron-right" />
+          </button>
+        </div>
+        <div class="sector-btn-wrapper-left">
+          <button
+            class="sector-btn"
+            @click="jog('X', -selectedStep)"
+            :disabled="!connected"
+          >
+            <UIcon name="i-heroicons-chevron-right" />
+          </button>
+        </div>
+        <div class="sector-btn-wrapper-down">
+          <button
+            class="sector-btn"
+            @click="jog('Y', -selectedStep)"
+            :disabled="!connected"
+          >
+            <UIcon name="i-heroicons-chevron-right" />
+          </button>
+        </div>
+        <div class="center-btn-wrapper">
+          <button class="center-btn" @click="homeAll" :disabled="!connected">
+            <span>0.00</span>
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- <UFieldGroup orientation="vertical">
-      <span class="section-label">{{ t("control.step") }}</span>
+    <div class="home-btns-wrapper">
       <UButton
-        v-for="s in steps"
-        :key="s"
-        :variant="selectedStep === s ? 'solid' : 'outline'"
-        :color="selectedStep === s ? 'primary' : 'neutral'"
+        icon="i-heroicons-home"
+        color="primary"
+        variant="soft"
         size="xl"
-        @click="selectedStep = s"
+        :disabled="!connected"
+        @click="homeAll"
+        class="home-btn-main"
       >
-        {{ s }}
       </UButton>
-    </UFieldGroup> -->
-
-    <div class="round-pad">
-      <div class="sector-btn-wrapper-up">
-        <button
-          class="sector-btn"
-          @click="jog('Y', selectedStep)"
-          :disabled="!connected"
-        >
-          <UIcon name="i-heroicons-chevron-right" />
-        </button>
-      </div>
-      <div class="sector-btn-wrapper-right">
-        <button
-          class="sector-btn"
-          @click="jog('X', selectedStep)"
-          :disabled="!connected"
-        >
-          <UIcon name="i-heroicons-chevron-right" />
-        </button>
-      </div>
-      <div class="sector-btn-wrapper-left">
-        <button
-          class="sector-btn"
-          @click="jog('X', -selectedStep)"
-          :disabled="!connected"
-        >
-          <UIcon name="i-heroicons-chevron-right" />
-        </button>
-      </div>
-      <div class="sector-btn-wrapper-down">
-        <button
-          class="sector-btn"
-          @click="jog('Y', -selectedStep)"
-          :disabled="!connected"
-        >
-          <UIcon name="i-heroicons-chevron-right" />
-        </button>
-      </div>
-      <div class="center-btn-wrapper">
-        <button class="center-btn" @click="homeAll" :disabled="!connected">
-          <span>0.00</span>
-        </button>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
 const { t } = useI18n();
 const { $fluidnc } = useNuxtApp();
 const { jog, homeAll, connected } = $fluidnc;
@@ -91,13 +100,15 @@ const selectedStep = ref<number>(1);
 
 <style scoped>
 .jog-pad {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 75px 1fr auto;
+  grid-template-rows: 1fr auto;
+  gap: 4px;
 }
 
 .step-selector {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -115,6 +126,20 @@ const selectedStep = ref<number>(1);
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+}
+
+.round-pad-wrapper {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.home-btns-wrapper {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: start;
 }
 
 .round-pad {

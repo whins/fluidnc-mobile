@@ -2,7 +2,7 @@
  * Plugin that provides a single shared FluidNC instance across all pages.
  * Use inject('fluidnc') in any component/page.
  */
-import type { useFluidNC } from "~/composables/useFluidNC";
+import { useFluidNC } from "~/composables/useFluidNC";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const fluidnc = useFluidNC();
