@@ -10,7 +10,8 @@
  */
 
 import { useWebSocket } from "@vueuse/core";
-import { ref } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, readonly, ref, watch } from "vue";
+import { useSettings } from "./useSettings";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

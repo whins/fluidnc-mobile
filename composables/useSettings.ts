@@ -1,3 +1,5 @@
+import { useLocalStorage } from "@vueuse/core";
+
 /**
  * useSettings — persistent app settings via localStorage
  */
@@ -9,11 +11,13 @@ export function useSettings() {
     "system",
   );
   const jogFeedrate = useLocalStorage<number>("fluidnc:jog-feedrate", 2000);
+  const jobControls = useLocalStorage<boolean>("fluidnc:job-controls", false);
 
   return {
     controllerIp,
     locale,
     colorMode,
     jogFeedrate,
+    jobControls
   };
 }

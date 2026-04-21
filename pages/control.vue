@@ -1,7 +1,7 @@
 <template>
   <div class="control-page">
     <!-- Machine action buttons -->
-    <div class="action-bar">
+    <div v-if="settings.jobControls.value" class="action-bar">
       <UButton
         icon="i-heroicons-pause"
         color="warning"
@@ -34,7 +34,7 @@
       </UButton>
     </div>
 
-    <USeparator :label="t('control.jog')" />
+    <!-- <USeparator :label="t('control.jog')" /> -->
 
     <!-- Jog section -->
     <section class="section">
@@ -118,6 +118,8 @@ const { t } = useI18n();
 const { $fluidnc } = useNuxtApp();
 const { feedHold, cycleStart, softReset, homeAll, homeAxis, connected } =
   $fluidnc;
+
+const settings = useSettings();
 
 const showResetModal = ref(false);
 

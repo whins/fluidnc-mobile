@@ -131,6 +131,8 @@ const selectedStep = ref<number>(1);
 .round-pad-wrapper {
   grid-column: 2;
   grid-row: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .home-btns-wrapper {
@@ -143,7 +145,7 @@ const selectedStep = ref<number>(1);
 }
 
 .round-pad {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: repeat(2, 120px);
   grid-template-rows: repeat(2, 120px);
   gap: 4px;
