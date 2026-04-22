@@ -6,7 +6,7 @@
         icon="i-heroicons-pause"
         color="warning"
         variant="soft"
-        size="sm"
+        size="xl"
         :disabled="!connected"
         @click="feedHold"
       >
@@ -16,7 +16,7 @@
         icon="i-heroicons-play"
         color="success"
         variant="soft"
-        size="sm"
+        size="xl"
         :disabled="!connected"
         @click="cycleStart"
       >
@@ -26,7 +26,7 @@
         icon="i-heroicons-x-circle"
         color="error"
         variant="soft"
-        size="sm"
+        size="xl"
         :disabled="!connected"
         @click="confirmReset"
       >
@@ -34,51 +34,14 @@
       </UButton>
     </div>
 
-    <!-- <USeparator :label="t('control.jog')" /> -->
-
+    <USeparator :label="t('control.jog')" />
+    
     <!-- Jog section -->
     <section class="section">
       <JogPad />
     </section>
 
-    <USeparator :label="t('control.home')" />
-
-    <!-- Home buttons -->
-    <section class="section">
-      <h2 class="section-title">{{ t("control.home") }}</h2>
-      <div class="home-buttons">
-        <UButton
-          icon="i-heroicons-home"
-          color="primary"
-          variant="soft"
-          :disabled="!connected"
-          @click="homeAll"
-          class="home-btn-main"
-        >
-          {{ t("control.homeAll") }}
-        </UButton>
-        <UButton
-          color="neutral"
-          variant="outline"
-          size="sm"
-          :disabled="!connected"
-          @click="homeAxis('X')"
-        >
-          {{ t("control.homeX") }}
-        </UButton>
-        <UButton
-          color="neutral"
-          variant="outline"
-          size="sm"
-          :disabled="!connected"
-          @click="homeAxis('Y')"
-        >
-          {{ t("control.homeY") }}
-        </UButton>
-      </div>
-    </section>
-
-    <USeparator label="OR" />
+    <USeparator label="Overrides" />
 
     <!-- Overrides -->
     <section class="section">
@@ -116,8 +79,7 @@ definePageMeta({ layout: "default" });
 
 const { t } = useI18n();
 const { $fluidnc } = useNuxtApp();
-const { feedHold, cycleStart, softReset, homeAll, homeAxis, connected } =
-  $fluidnc;
+const { feedHold, cycleStart, softReset, connected } = $fluidnc;
 
 const settings = useSettings();
 
@@ -156,14 +118,6 @@ async function doReset() {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.section-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ui-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 .home-buttons {

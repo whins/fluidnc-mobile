@@ -54,11 +54,11 @@ function parseStatus(raw: string): MachineStatus | null {
   const match = raw.match(/^<([^|>]+)(.*)>$/);
   if (!match) return null;
 
-  const statePart = match[1];
-  const rest = match[2];
+  const statePart = match[1]!;
+  const rest = match[2]!;
 
   // State may include sub-state like "Hold:0"
-  const state = statePart.split(":")[0] as MachineState;
+  const state = (statePart ?? "Unknown").split(":")[0] as MachineState;
 
   const wpos = { x: 0, y: 0, z: 0 };
   const mpos = { x: 0, y: 0, z: 0 };
@@ -68,29 +68,29 @@ function parseStatus(raw: string): MachineStatus | null {
 
   const wposMatch = rest.match(/WPos:([-\d.]+),([-\d.]+),([-\d.]+)/);
   if (wposMatch) {
-    wpos.x = parseFloat(wposMatch[1]);
-    wpos.y = parseFloat(wposMatch[2]);
-    wpos.z = parseFloat(wposMatch[3]);
+    wpos.x = parseFloat(wposMatch[1]!);
+    wpos.y = parseFloat(wposMatch[2]!);
+    wpos.z = parseFloat(wposMatch[3]!);
   }
 
   const mposMatch = rest.match(/MPos:([-\d.]+),([-\d.]+),([-\d.]+)/);
   if (mposMatch) {
-    mpos.x = parseFloat(mposMatch[1]);
-    mpos.y = parseFloat(mposMatch[2]);
-    mpos.z = parseFloat(mposMatch[3]);
+    mpos.x = parseFloat(mposMatch[1]!);
+    mpos.y = parseFloat(mposMatch[2]!);
+    mpos.z = parseFloat(mposMatch[3]!);
   }
 
   // FS:feedrate,spindleSpeed
   const fsMatch = rest.match(/FS:([\d.]+),([\d.]+)/);
   if (fsMatch) {
-    feedRate = parseFloat(fsMatch[1]);
-    spindleSpeed = parseFloat(fsMatch[2]);
+    feedRate = parseFloat(fsMatch[1]!);
+    spindleSpeed = parseFloat(fsMatch[2]!);
   }
 
   // SD:percent
   const sdMatch = rest.match(/SD:([\d.]+)/);
   if (sdMatch) {
-    sdPercent = parseFloat(sdMatch[1]);
+    sdPercent = parseFloat(sdMatch[1]!);
   }
 
   return { state, wpos, mpos, feedRate, spindleSpeed, sdPercent, raw };
@@ -108,10 +108,10 @@ function parseSDFileList(text: string): SDFile[] {
   const regex = /\[FILE:\s*([^|]+)\|SIZE:(\d+)\]/g;
   let m;
   while ((m = regex.exec(text)) !== null) {
-    const name = m[1].trim();
+    const name = m[1]!.trim();
     files.push({
       name,
-      size: parseInt(m[2]),
+      size: parseInt(m[2]!),
       path: name.startsWith("/") ? name : `/${name}`,
     });
   }

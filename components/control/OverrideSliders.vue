@@ -36,19 +36,70 @@
         />
       </div>
       <div class="preset-buttons">
+        <UFieldGroup>
+          <UButton
+            v-for="p in feedratePresets"
+            :key="p"
+            size="xl"
+            :variant="feedratePercent === p ? 'solid' : 'outline'"
+            color="primary"
+            @click="setFeedrate(p)"
+            :disabled="!connected"
+          >
+            {{ p }}%
+          </UButton>
+        </UFieldGroup>
+      </div>
+
+      <UFieldGroup>
         <UButton
-          v-for="p in feedratePresets"
-          :key="p"
-          size="xs"
-          :variant="feedratePercent === p ? 'solid' : 'ghost'"
-          :color="feedratePercent === p ? 'primary' : 'neutral'"
-          @click="setFeedrate(p)"
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+          class="home-btn-main"
+        >
+          -10%
+        </UButton>
+        <UButton
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+          class="home-btn-main"
+        >
+          -5%
+        </UButton>
+        <UButton
+          icon="i-heroicons-x-circle"
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+          class="home-btn-main"
+        >
+          100%
+        </UButton>
+        <UButton
+          color="primary"
+          variant="outline"
+          size="xl"
           :disabled="!connected"
         >
-          {{ p }}%
+          +5%
         </UButton>
-      </div>
+        <UButton
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+        >
+          +10%
+        </UButton>
+      </UFieldGroup>
     </div>
+
+    <USeparator />
 
     <USeparator />
 
@@ -110,12 +161,15 @@
 <script setup lang="ts">
 const { t } = useI18n();
 const { $fluidnc } = useNuxtApp();
-const { setFeedrateOverride, setLaserOverride, connected } = $fluidnc;
+// const { setFeedrateOverride, setLaserOverride, connected } = $fluidnc;
+const { setFeedrateOverride, setLaserOverride } = $fluidnc;
+
+const connected = true;
 
 const feedratePercent = ref(100);
 const laserPercent = ref(100);
 
-const feedratePresets = [50, 75, 100, 125];
+const feedratePresets = [50, 75, 100, 125, 150];
 const laserPresets = [25, 50, 75, 100];
 
 async function applyFeedrate() {

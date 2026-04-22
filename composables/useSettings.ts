@@ -6,18 +6,23 @@ import { useLocalStorage } from "@vueuse/core";
 export function useSettings() {
   const controllerIp = useLocalStorage<string>("fluidnc:ip", "");
   const locale = useLocalStorage<"en" | "uk">("fluidnc:locale", "en");
-  const colorMode = useLocalStorage<"light" | "dark" | "system">(
-    "fluidnc:theme",
-    "system",
-  );
   const jogFeedrate = useLocalStorage<number>("fluidnc:jog-feedrate", 2000);
-  const jobControls = useLocalStorage<boolean>("fluidnc:job-controls", false);
+  const jobControls = useLocalStorage<boolean>("fluidnc:job-controls", true);
+  const moreHomeBtns = useLocalStorage<boolean>(
+    "fluidnc:more-home-btns",
+    false,
+  );
+  const colorMode = useLocalStorage<"light" | "dark" | "auto">(
+    "fluidnc:theme",
+    "auto",
+  );
 
   return {
     controllerIp,
     locale,
     colorMode,
     jogFeedrate,
-    jobControls
+    jobControls,
+    moreHomeBtns,
   };
 }

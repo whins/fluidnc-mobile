@@ -70,6 +70,7 @@
 
     <div class="home-btns-wrapper">
       <UButton
+        v-if="!settings.moreHomeBtns.value"
         icon="i-heroicons-home"
         color="primary"
         variant="soft"
@@ -79,6 +80,43 @@
         class="home-btn-main"
       >
       </UButton>
+
+      <UFieldGroup v-if="settings.moreHomeBtns.value" orientation="vertical">
+        <UBadge
+          color="neutral"
+          variant="outline"
+          size="lg"
+          :label="t(`control.home`)"
+        />
+        <UButton
+          icon="i-heroicons-home"
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+          @click="homeAll"
+          class="home-btn-main"
+        >
+        </UButton>
+        <UButton
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+          @click="homeAxis('X')"
+        >
+          X
+        </UButton>
+        <UButton
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+          @click="homeAxis('Y')"
+        >
+          Y
+        </UButton>
+      </UFieldGroup>
     </div>
   </div>
 </template>
@@ -88,7 +126,7 @@ import { ref } from "vue";
 
 const { t } = useI18n();
 const { $fluidnc } = useNuxtApp();
-const { jog, homeAll, connected } = $fluidnc;
+const { jog, homeAll, connected, homeAxis } = $fluidnc;
 // const { jog, homeAll } = $fluidnc;
 
 // const connected = true;
