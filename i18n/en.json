@@ -71,6 +71,10 @@
     "version": "Version",
     "source": "Source code",
     "jobControls": "Job controls",
-    "moreHomeBtns": "Home buttons for each axis"
+    "moreHomeBtns": "Home buttons for each axis",
+    "simulationTitle": "Simulation Mode",
+    "simEnabled": "Enable Simulation Override",
+    "simConnected": "Simulated Connection Status",
+    "simState": "Simulated Machine State"
   }
 }

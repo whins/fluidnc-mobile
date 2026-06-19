@@ -1,7 +1,7 @@
 <template>
   <div class="control-page">
     <!-- Machine action buttons -->
-    <div v-if="settings.jobControls.value" class="action-bar">
+    <div v-if="settings.jobControls.value && isJobRunning" class="action-bar">
       <UButton
         icon="i-heroicons-pause"
         color="warning"
@@ -34,19 +34,21 @@
       </UButton>
     </div>
 
-    <USeparator :label="t('control.jog')" />
-    
-    <!-- Jog section -->
-    <section class="section">
-      <JogPad />
-    </section>
+    <div v-if="connected && !isJobRunning">
+      <USeparator :label="t('control.jog')" />
+      <!-- Jog section -->
+      <section class="section">
+        <JogPad />
+      </section>
+    </div>
 
-    <USeparator label="Overrides" />
-
-    <!-- Overrides -->
-    <section class="section">
-      <OverrideSliders />
-    </section>
+    <div v-if="isJobRunning">
+      <USeparator label="Overrides" />
+      <!-- Overrides -->
+      <section class="section">
+        <OverrideSliders />
+      </section>
+    </div>
 
     <!-- Reset confirmation modal -->
     <UModal v-model:open="showResetModal">
@@ -73,15 +75,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 definePageMeta({ layout: "default" });
 
 const { t } = useI18n();
 const { $fluidnc } = useNuxtApp();
-const { feedHold, cycleStart, softReset, connected } = $fluidnc;
+const { feedHold, cycleStart, softReset, connected, status } = $fluidnc;
 
 const settings = useSettings();
+
+const isJobRunning = computed(
+  () => connected.value && (status.state === "Run" || status.state === "Hold"),
+);
 
 const showResetModal = ref(false);
 

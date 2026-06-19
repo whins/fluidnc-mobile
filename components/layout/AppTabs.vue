@@ -1,7 +1,7 @@
 <template>
   <nav class="app-tabs">
     <NuxtLink
-      v-for="tab in tabs"
+      v-for="tab in filteredTabs"
       :key="tab.to"
       :to="tab.to"
       class="tab-item"
@@ -14,17 +14,27 @@
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n();
+import { computed } from "vue";
 
-const tabs = [
-  {
-    to: "/control",
-    icon: "i-heroicons-arrows-pointing-out",
-    label: "nav.control",
-  },
-  { to: "/files", icon: "i-heroicons-folder", label: "nav.files" },
-  { to: "/settings", icon: "i-heroicons-cog-6-tooth", label: "nav.settings" },
-];
+const { t } = useI18n();
+const { $fluidnc } = useNuxtApp();
+const { connected } = $fluidnc;
+
+const filteredTabs = computed(() => {
+  const allTabs = [
+    {
+      to: "/control",
+      icon: "i-heroicons-arrows-pointing-out",
+      label: "nav.control",
+    },
+    { to: "/files", icon: "i-heroicons-folder", label: "nav.files" },
+    { to: "/settings", icon: "i-heroicons-cog-6-tooth", label: "nav.settings" },
+  ];
+  if (!connected.value) {
+    return allTabs.filter((tab) => tab.to === "/settings");
+  }
+  return allTabs;
+});
 </script>
 
 <style scoped>

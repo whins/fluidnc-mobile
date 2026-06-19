@@ -124,7 +124,7 @@ export function useFluidNC() {
   const settings = useSettings();
 
   // ── Reactive state ──────────────────────────────────────────────────────────
-  const status = ref<MachineStatus>({
+  const realStatus = ref<MachineStatus>({
     state: "Unknown",
     wpos: { x: 0, y: 0, z: 0 },
     mpos: { x: 0, y: 0, z: 0 },
@@ -134,7 +134,30 @@ export function useFluidNC() {
     raw: "",
   });
 
-  const connected = ref(false);
+  const realConnected = ref(false);
+
+  const connected = computed(() => {
+    if (settings.simulationEnabled.value) {
+      return settings.simulatedConnected.value;
+    }
+    return realConnected.value;
+  });
+
+  const status = computed(() => {
+    if (settings.simulationEnabled.value) {
+      return {
+        state: settings.simulatedState.value as MachineState,
+        wpos: { x: 10.5, y: -20.3, z: 0.0 },
+        mpos: { x: 10.5, y: -20.3, z: 0.0 },
+        feedRate: 1500,
+        spindleSpeed: 1000,
+        sdPercent: settings.simulatedState.value === "Run" ? 42.5 : null,
+        raw: `<${settings.simulatedState.value}|WPos:10.500,-20.300,0.000|FS:1500,1000>`,
+      };
+    }
+    return realStatus.value;
+  });
+
   const wsError = ref<string | null>(null);
   const commandLog = ref<string[]>([]);
 
@@ -171,12 +194,12 @@ export function useFluidNC() {
         pongTimeout: 5000,
       },
       onConnected() {
-        connected.value = true;
+        realConnected.value = true;
         wsError.value = null;
       },
       onDisconnected() {
-        connected.value = false;
-        status.value.state = "Unknown";
+        realConnected.value = false;
+        realStatus.value.state = "Unknown";
       },
       onError(_, event) {
         wsError.value = `WebSocket error: ${event.type}`;
@@ -191,7 +214,7 @@ export function useFluidNC() {
         if (line.startsWith("<")) {
           const parsed = parseStatus(line);
           if (parsed) {
-            status.value = parsed;
+            realStatus.value = parsed;
           }
           return;
         }
@@ -207,7 +230,7 @@ export function useFluidNC() {
 
   function disconnectWS() {
     ws?.close();
-    connected.value = false;
+    realConnected.value = false;
   }
 
   // Watch IP changes → reconnect

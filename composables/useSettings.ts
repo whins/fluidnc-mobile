@@ -16,6 +16,10 @@ export function useSettings() {
     "fluidnc:theme",
     "auto",
   );
+  
+  const simulationEnabled = useLocalStorage<boolean>("fluidnc:sim-enabled", false);
+  const simulatedConnected = useLocalStorage<boolean>("fluidnc:sim-connected", false);
+  const simulatedState = useLocalStorage<string>("fluidnc:sim-state", "Idle");
 
   return {
     controllerIp,
@@ -24,5 +28,8 @@ export function useSettings() {
     jogFeedrate,
     jobControls,
     moreHomeBtns,
+    simulationEnabled,
+    simulatedConnected,
+    simulatedState,
   };
 }
