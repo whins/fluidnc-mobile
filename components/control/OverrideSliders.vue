@@ -58,6 +58,7 @@
           size="xl"
           :disabled="!connected"
           class="home-btn-main"
+          @click="adjustFeedrate(-10)"
         >
           -10%
         </UButton>
@@ -67,6 +68,7 @@
           size="xl"
           :disabled="!connected"
           class="home-btn-main"
+          @click="adjustFeedrate(-5)"
         >
           -5%
         </UButton>
@@ -77,6 +79,7 @@
           size="xl"
           :disabled="!connected"
           class="home-btn-main"
+          @click="setFeedrate(100)"
         >
           100%
         </UButton>
@@ -85,6 +88,7 @@
           variant="outline"
           size="xl"
           :disabled="!connected"
+          @click="adjustFeedrate(5)"
         >
           +5%
         </UButton>
@@ -93,6 +97,7 @@
           variant="outline"
           size="xl"
           :disabled="!connected"
+          @click="adjustFeedrate(10)"
         >
           +10%
         </UButton>
@@ -161,10 +166,7 @@
 <script setup lang="ts">
 const { t } = useI18n();
 const { $fluidnc } = useNuxtApp();
-// const { setFeedrateOverride, setLaserOverride, connected } = $fluidnc;
-const { setFeedrateOverride, setLaserOverride } = $fluidnc;
-
-const connected = true;
+const { setFeedrateOverride, setLaserOverride, connected } = $fluidnc;
 
 const feedratePercent = ref(100);
 const laserPercent = ref(100);

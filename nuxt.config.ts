@@ -5,6 +5,12 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
 
+  runtimeConfig: {
+    public: {
+      defaultIp: process.env.NUXT_PUBLIC_DEFAULT_IP || "192.168.1.152",
+    },
+  },
+
   modules: ["@nuxt/ui", "@nuxtjs/i18n", "@vueuse/nuxt", "@vite-pwa/nuxt"],
 
   css: ["~/assets/css/main.css"],
