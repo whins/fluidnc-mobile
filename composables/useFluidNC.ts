@@ -10,7 +10,15 @@
  */
 
 import { useWebSocket } from "@vueuse/core";
-import { computed, nextTick, onMounted, onUnmounted, readonly, ref, watch } from "vue";
+import {
+  computed,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  readonly,
+  ref,
+  watch,
+} from "vue";
 import { useSettings } from "./useSettings";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -166,7 +174,7 @@ export function useFluidNC() {
     const ip = settings.controllerIp.value;
     if (!ip) return null;
     // FluidNC WS port = HTTP port + 1 (default 81)
-    return `ws://${ip}:82`;
+    return `ws://${ip}:81`;
   });
 
   let ws: ReturnType<typeof useWebSocket> | null = null;
@@ -176,8 +184,6 @@ export function useFluidNC() {
     if (!url) {
       return;
     }
-
-    debugger
 
     ws = useWebSocket(url, {
       autoReconnect: {
@@ -252,14 +258,14 @@ export function useFluidNC() {
   });
 
   /**
-   * Send a command via HTTP GET /command?plain=CMD
+   * Send a command via HTTP GET /command?cmd=CMD
    * Returns the response text or throws on error.
    */
   async function sendCommand(cmd: string): Promise<string> {
     const base = baseUrl.value;
     if (!base) throw new Error("No controller IP configured");
 
-    const url = `${base}/command?plain=${encodeURIComponent(cmd)}`;
+    const url = `${base}/command?cmd=${encodeURIComponent(cmd)}`;
     const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
 
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
@@ -444,7 +450,7 @@ export function useFluidNC() {
   // ── Lifecycle ────────────────────────────────────────────────────────────────
 
   onMounted(() => {
-    debugger
+    debugger;
     if (settings.controllerIp.value) {
       connectWS();
     }

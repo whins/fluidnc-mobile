@@ -96,7 +96,6 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from "@nuxt/ui/runtime/composables/index.js";
 import { computed, ref } from "vue";
 
 definePageMeta({ layout: "default" });

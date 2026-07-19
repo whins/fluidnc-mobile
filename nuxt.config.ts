@@ -1,9 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { defineNuxtConfig } from 'nuxt/config'
+import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
+
+  runtimeConfig: {
+    public: {
+      defaultIp: process.env.NUXT_PUBLIC_DEFAULT_IP || "192.168.1.152",
+    },
+  },
 
   modules: ["@nuxt/ui", "@nuxtjs/i18n", "@vueuse/nuxt", "@vite-pwa/nuxt"],
 
@@ -69,5 +75,16 @@ export default defineNuxtConfig({
     appManifest: false,
   },
 
+  vite: {
+    server: {
+      proxy: {
+        "/api": {
+          target: `http://${process.env.NUXT_PUBLIC_DEFAULT_IP || "192.168.1.152"}`,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ""),
+        },
+      },
+    },
+  },
   ssr: false, // SPA mode for Vercel static deploy
 });

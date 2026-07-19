@@ -133,7 +133,6 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp } from "@nuxt/ui/runtime/vue/stubs/base.js";
 import { computed, onMounted, ref, watch } from "vue";
 import type { SDFile } from "~/composables/useFluidNC";
 
