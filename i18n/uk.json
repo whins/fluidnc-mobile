@@ -71,6 +71,10 @@
     "version": "Версія",
     "source": "Вихідний код",
     "jobControls": "Кнопки керування",
-    "moreHomeBtns": "Кнопка <Додому> для кожної осі"
+    "moreHomeBtns": "Кнопка <Додому> для кожної осі",
+    "simulationTitle": "Simulation Mode",
+    "simEnabled": "Enable Simulation Override",
+    "simConnected": "Simulated Connection Status",
+    "simState": "Simulated Machine State"
   }
 }

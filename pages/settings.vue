@@ -90,6 +90,20 @@
           checked-icon="i-lucide-check"
           size="xl"
         />
+        <USwitch
+          v-model="settings.simulationEnabled.value"
+          :label="t('settings.simulationEnabled')"
+          unchecked-icon="i-lucide-x"
+          checked-icon="i-lucide-check"
+          size="xl"
+        />
+        <USwitch
+          v-model="settings.simulatedConnected.value"
+          :label="t('settings.simulatedConnected')"
+          unchecked-icon="i-lucide-x"
+          checked-icon="i-lucide-check"
+          size="xl"
+        />
       </div>
     </UCard>
   </div>

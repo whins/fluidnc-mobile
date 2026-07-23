@@ -35,6 +35,60 @@
           @click="adjustFeedrate(10)"
         />
       </div>
+
+      <div class="preset-buttons">
+        <UFieldGroup>
+          <UButton
+            color="primary"
+            variant="outline"
+            size="xl"
+            :disabled="!connected"
+            class="home-btn-main"
+            @click="adjustFeedrate(-10)"
+          >
+            -10%
+          </UButton>
+          <UButton
+            color="primary"
+            variant="outline"
+            size="xl"
+            :disabled="!connected"
+            class="home-btn-main"
+            @click="adjustFeedrate(-5)"
+          >
+            -5%
+          </UButton>
+          <UButton
+            icon="i-heroicons-x-circle"
+            color="primary"
+            variant="outline"
+            size="xl"
+            :disabled="!connected"
+            class="home-btn-main"
+            @click="setFeedrate(100)"
+          >
+            100%
+          </UButton>
+          <UButton
+            color="primary"
+            variant="outline"
+            size="xl"
+            :disabled="!connected"
+            @click="adjustFeedrate(5)"
+          >
+            +5%
+          </UButton>
+          <UButton
+            color="primary"
+            variant="outline"
+            size="xl"
+            :disabled="!connected"
+            @click="adjustFeedrate(10)"
+          >
+            +10%
+          </UButton>
+        </UFieldGroup>
+      </div>
       <div class="preset-buttons">
         <UFieldGroup>
           <UButton
@@ -50,61 +104,7 @@
           </UButton>
         </UFieldGroup>
       </div>
-
-      <UFieldGroup>
-        <UButton
-          color="primary"
-          variant="outline"
-          size="xl"
-          :disabled="!connected"
-          class="home-btn-main"
-          @click="adjustFeedrate(-10)"
-        >
-          -10%
-        </UButton>
-        <UButton
-          color="primary"
-          variant="outline"
-          size="xl"
-          :disabled="!connected"
-          class="home-btn-main"
-          @click="adjustFeedrate(-5)"
-        >
-          -5%
-        </UButton>
-        <UButton
-          icon="i-heroicons-x-circle"
-          color="primary"
-          variant="outline"
-          size="xl"
-          :disabled="!connected"
-          class="home-btn-main"
-          @click="setFeedrate(100)"
-        >
-          100%
-        </UButton>
-        <UButton
-          color="primary"
-          variant="outline"
-          size="xl"
-          :disabled="!connected"
-          @click="adjustFeedrate(5)"
-        >
-          +5%
-        </UButton>
-        <UButton
-          color="primary"
-          variant="outline"
-          size="xl"
-          :disabled="!connected"
-          @click="adjustFeedrate(10)"
-        >
-          +10%
-        </UButton>
-      </UFieldGroup>
     </div>
-
-    <USeparator />
 
     <USeparator />
 
@@ -125,7 +125,7 @@
           color="neutral"
           variant="outline"
           :disabled="!connected || laserPercent <= 0"
-          @click="adjustLaser(-10)"
+          @click="adjustLaser(laserPercent > 90 ? -1 : -5)"
         />
         <input
           type="range"
@@ -143,21 +143,23 @@
           color="neutral"
           variant="outline"
           :disabled="!connected || laserPercent >= 100"
-          @click="adjustLaser(10)"
+          @click="adjustLaser(laserPercent > 85 ? 1 : 5)"
         />
       </div>
       <div class="preset-buttons">
-        <UButton
-          v-for="p in laserPresets"
-          :key="p"
-          size="xs"
-          :variant="laserPercent === p ? 'solid' : 'ghost'"
-          :color="laserPercent === p ? 'warning' : 'neutral'"
-          @click="setLaser(p)"
-          :disabled="!connected"
-        >
-          {{ p }}%
-        </UButton>
+        <UFieldGroup>
+          <UButton
+            v-for="p in laserPresets"
+            :key="p"
+            size="xl"
+            :variant="laserPercent === p ? 'solid' : 'outline'"
+            color="warning"
+            @click="setLaser(p)"
+            :disabled="!connected"
+          >
+            {{ p }}%
+          </UButton>
+        </UFieldGroup>
       </div>
     </div>
   </div>
@@ -172,7 +174,7 @@ const feedratePercent = ref(100);
 const laserPercent = ref(100);
 
 const feedratePresets = [50, 75, 100, 125, 150];
-const laserPresets = [25, 50, 75, 100];
+const laserPresets = [40, 60, 80, 100];
 
 async function applyFeedrate() {
   await setFeedrateOverride(feedratePercent.value);
@@ -288,6 +290,7 @@ async function setLaser(val: number) {
 
 .preset-buttons {
   display: flex;
+  justify-content: center;
   gap: 6px;
 }
 </style>

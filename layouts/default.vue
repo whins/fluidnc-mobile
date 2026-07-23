@@ -5,12 +5,21 @@
 
     <!-- Floating coordinates & state (only when connected) -->
     <div v-if="connected" class="floating-status">
-      <UBadge :color="stateColor" variant="subtle" size="sm" class="state-badge">
+      <UBadge
+        :color="stateColor"
+        variant="subtle"
+        size="sm"
+        class="state-badge"
+      >
         {{ t(`status.state.${status.state}`) }}
       </UBadge>
       <div class="coords">
-        <span class="coord"><span class="coord-axis">X</span>{{ status.wpos.x.toFixed(2) }}</span>
-        <span class="coord"><span class="coord-axis">Y</span>{{ status.wpos.y.toFixed(2) }}</span>
+        <span class="coord"
+          ><span class="coord-axis">X</span>{{ status.wpos.x.toFixed(2) }}</span
+        >
+        <span class="coord"
+          ><span class="coord-axis">Y</span>{{ status.wpos.y.toFixed(2) }}</span
+        >
       </div>
     </div>
 
@@ -58,7 +67,8 @@ watch(connected, (isConn) => {
 const statusClass = computed(() => {
   if (!connected.value) return "status-glow--disconnected";
   if (status.state === "Alarm") return "status-glow--alarm";
-  if (["Run", "Jog", "Home"].includes(status.state)) return "status-glow--working";
+  if (["Run", "Jog", "Home"].includes(status.state))
+    return "status-glow--working";
   return "status-glow--idle";
 });
 
@@ -102,18 +112,21 @@ const stateColor = computed(() => {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
   box-shadow: inset 0 0 0 0 transparent;
 }
 
 /* Disconnected: Grey shadow */
 .status-glow--disconnected {
-  box-shadow: inset 0 0 16px rgba(100, 116, 139, 0.45);
+  box-shadow: inset 0 0 26px rgba(100, 116, 139, 0.45);
   border: 2px solid rgba(100, 116, 139, 0.25);
 }
 
 /* Alarm: Red pulsing shadow */
 .status-glow--alarm {
+  box-shadow: inset 0 0 12px rgba(239, 68, 68, 0.4);
   border: 2px solid rgba(239, 68, 68, 0.4);
   animation: pulse-alarm 1.5s infinite alternate;
 }
@@ -164,7 +177,9 @@ const stateColor = computed(() => {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   transition: all 0.3s ease;
 }
 
@@ -173,7 +188,9 @@ const stateColor = computed(() => {
   .floating-status {
     background: rgba(15, 23, 42, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 }
 

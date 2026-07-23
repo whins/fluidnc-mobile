@@ -1,23 +1,46 @@
 <template>
   <div class="jog-pad">
-    <div class="step-selector">
-      <UFieldGroup orientation="vertical">
-        <!-- <span class="section-label">{{ t("control.step") }}</span> -->
-        <UBadge
-          color="neutral"
-          variant="outline"
-          size="lg"
-          :label="t(`control.step`)"
-        />
+    <div class="home-btns-wrapper">
+      <UButton
+        v-if="!settings.moreHomeBtns.value"
+        icon="i-heroicons-home"
+        color="primary"
+        variant="soft"
+        size="xl"
+        :disabled="!connected"
+        @click="homeAll"
+        class="home-btn-main"
+      >
+      </UButton>
+
+      <UFieldGroup v-if="settings.moreHomeBtns.value">
         <UButton
-          v-for="s in steps"
-          :key="s"
-          :variant="selectedStep === s ? 'solid' : 'outline'"
-          :color="selectedStep === s ? 'primary' : 'neutral'"
+          icon="i-heroicons-home"
+          color="primary"
+          variant="outline"
           size="xl"
-          @click="selectedStep = s"
+          :disabled="!connected"
+          @click="homeAll"
+          class="home-btn-main"
         >
-          {{ s }}
+        </UButton>
+        <UButton
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+          @click="homeAxis('X')"
+        >
+          X
+        </UButton>
+        <UButton
+          color="primary"
+          variant="outline"
+          size="xl"
+          :disabled="!connected"
+          @click="homeAxis('Y')"
+        >
+          Y
         </UButton>
       </UFieldGroup>
     </div>
@@ -68,53 +91,24 @@
       </div>
     </div>
 
-    <div class="home-btns-wrapper">
-      <UButton
-        v-if="!settings.moreHomeBtns.value"
-        icon="i-heroicons-home"
-        color="primary"
-        variant="soft"
-        size="xl"
-        :disabled="!connected"
-        @click="homeAll"
-        class="home-btn-main"
-      >
-      </UButton>
-
-      <UFieldGroup v-if="settings.moreHomeBtns.value" orientation="vertical">
+    <div class="step-selector">
+      <UFieldGroup>
         <UBadge
           color="neutral"
           variant="outline"
           size="lg"
-          :label="t(`control.home`)"
+          :label="t(`control.step`)"
         />
         <UButton
-          icon="i-heroicons-home"
-          color="primary"
-          variant="outline"
+          v-for="s in steps"
+          :key="s"
+          :variant="selectedStep === s ? 'solid' : 'outline'"
+          :color="selectedStep === s ? 'primary' : 'neutral'"
           size="xl"
-          :disabled="!connected"
-          @click="homeAll"
-          class="home-btn-main"
+          style="width: 40pt"
+          @click="selectedStep = s"
         >
-        </UButton>
-        <UButton
-          color="primary"
-          variant="outline"
-          size="xl"
-          :disabled="!connected"
-          @click="homeAxis('X')"
-        >
-          X
-        </UButton>
-        <UButton
-          color="primary"
-          variant="outline"
-          size="xl"
-          :disabled="!connected"
-          @click="homeAxis('Y')"
-        >
-          Y
+          {{ s }}
         </UButton>
       </UFieldGroup>
     </div>
@@ -138,9 +132,10 @@ const selectedStep = ref<number>(1);
 
 <style scoped>
 .jog-pad {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: 1fr auto;
+  display: flex;
+  flex-flow: column;
+  /* grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1fr auto; */
   gap: 4px;
 }
 
@@ -149,6 +144,7 @@ const selectedStep = ref<number>(1);
   grid-row: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   width: 100%;
 }
@@ -171,13 +167,13 @@ const selectedStep = ref<number>(1);
   grid-row: 1;
   display: flex;
   justify-content: center;
+  padding: 20px 0;
 }
 
 .home-btns-wrapper {
   grid-column: 3;
   grid-row: 1;
   display: flex;
-  flex-flow: column;
   align-items: center;
   justify-content: start;
 }
