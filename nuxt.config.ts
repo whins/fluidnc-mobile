@@ -42,6 +42,7 @@ export default defineNuxtConfig({
 
   pwa: {
     registerType: "autoUpdate",
+    injectRegister: "auto",
     manifest: {
       name: "FluidNC Mobile",
       short_name: "FluidNC",
@@ -64,15 +65,17 @@ export default defineNuxtConfig({
       ],
     },
     workbox: {
+      clientsClaim: true,
+      skipWaiting: true,
       navigateFallback: "/",
       globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
     },
     devOptions: {
-      enabled: false,
+      enabled: true,
     },
   },
   experimental: {
-    appManifest: false,
+    appManifest: true,
   },
 
   vite: {
