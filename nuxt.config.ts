@@ -43,6 +43,7 @@ export default defineNuxtConfig({
   pwa: {
     registerType: "autoUpdate",
     injectRegister: "auto",
+    manifestFilename: "manifest.webmanifest",
     manifest: {
       name: "FluidNC Mobile",
       short_name: "FluidNC",
